@@ -1,2 +1,4 @@
 "# Atividade GitFlow com Rebase" 
 "DEV edit" 
+"First edit na feat-01" 
+"Second edit na feat-01" 
