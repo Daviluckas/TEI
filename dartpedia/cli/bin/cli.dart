@@ -5,9 +5,17 @@ void main(List<String> arguments) {
     print('Hello, Dart!');
   } else if (arguments.first == 'version'){
     print('Dartpedia CLI version $version');
+  } else if (arguments.first == 'search'){
+    final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
+    searchWikipedia(inputArgs);
+    print('Search command recognized!');
   } else {
     printUsage();
   }
+}
+
+void searchWikipedia(List<String>? arguments) {
+  print('searchWikipedia received arguments: $arguments');
 }
 
 void printUsage() {
