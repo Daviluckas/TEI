@@ -8,10 +8,9 @@ void main(List<String> arguments) {
     print('Hello, Dart!');
   } else if (arguments.first == 'version'){
     print('Dartpedia CLI version $version');
-  } else if (arguments.first == 'search'){
+  } else if (arguments.first == 'wikipedia'){
     final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
     searchWikipedia(inputArgs);
-    print('Search command recognized!');
   } else {
     printUsage();
   }
@@ -28,7 +27,7 @@ Future<String> getWikipediaArticle(String articleTitle) async {
     'en.wikipedia.org',
     'api/rest_v1/page/summary/$articleTitle',
   );
-  final responde = await http.get(url);
+  final response = await http.get(url);
 
   if (response.statusCode == 200) {
     return response.body;
@@ -37,13 +36,13 @@ Future<String> getWikipediaArticle(String articleTitle) async {
   return 'Error: Failed to fetch article "$articleTitle". Status code: ${response.statusCode}';
 }
 
-void searchWikipedia(List<String>? arguments) {
-  final String articleTittle;
+void searchWikipedia(List<String>? arguments) async {
+  final String articleTitle;
 
   if (arguments == null || arguments.isEmpty){
     print('Please provide an article title.');
 
-    final inputFromStdin == null || stdin.readLineSync();
+    final inputFromStdin = stdin.readLineSync();
     if (inputFromStdin == null || inputFromStdin.isEmpty){
       print('No article title provided. Exiting.');
       return; 
