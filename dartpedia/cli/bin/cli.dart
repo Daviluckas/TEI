@@ -42,12 +42,20 @@ void searchWikipedia(List<String>? arguments) {
 
   if (arguments == null || arguments.isEmpty){
     print('Please provide an article title.');
-    articleTitle = stdin.readLineSync() ?? '';
+
+    final inputFromStdin == null || stdin.readLineSync();
+    if (inputFromStdin == null || inputFromStdin.isEmpty){
+      print('No article title provided. Exiting.');
+      return; 
+    }
+    articleTitle = inputFromStdin;
   } else {
     articleTitle = arguments.join(' ');
   }
+
   print('Looking up articles about "$articleTitle". Please wait.');
-  print('Here ya go!');
-  print('(Pretend this is an article about "$articleTitle")');
+  
+  var articleContent = await getWikipediaArticle(articleTitle);
+  print(articleContent);
 }
 
