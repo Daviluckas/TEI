@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:http/http.dart' as http; 
 
 const version = '0.0.1';
 void main(List<String> arguments) {
@@ -16,6 +17,26 @@ void main(List<String> arguments) {
   }
 }
 
+void printUsage() {
+  print(
+    "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE'"
+  );
+}
+
+Future<String> getWikipediaArticle(String articleTitle) async {
+  final url = Uri.https(
+    'en.wikipedia.org',
+    'api/rest_v1/page/summary/$articleTitle',
+  );
+  final responde = await http.get(url);
+
+  if (response.statusCode == 200) {
+    return response.body;
+  }
+
+  return 'Error: Failed to fetch article "$articleTitle". Status code: ${response.statusCode}';
+}
+
 void searchWikipedia(List<String>? arguments) {
   final String articleTittle;
 
@@ -30,8 +51,3 @@ void searchWikipedia(List<String>? arguments) {
   print('(Pretend this is an article about "$articleTitle")');
 }
 
-void printUsage() {
-  print(
-    "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE'"
-  );
-}
