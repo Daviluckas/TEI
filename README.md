@@ -1,10 +1,1 @@
-"# Atividade GitFlow com Rebase" 
-"DEV edit" 
-"First edit na feat-01" 
-"Second edit na feat-01" 
-"Login 1" 
-"Login 2" 
-"Login 3" 
-"Cadastro 1" 
-"Cadastro 2" 
-"Cadastro 3" 
+Repositório usado na matéria de Tópicos Específicos Para a Internet II
