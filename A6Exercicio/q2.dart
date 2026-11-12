@@ -1,12 +1,3 @@
-/*
-Jogo da Velha (Lista e matrizes) Dado um tabuleiro representado como uma matriz 3x3, verifique o estado atual do jogo:
-- Cada casa do tabuleiro só pode ter 3 valores: 'X', 'O', ou ' ' (espaço).
-- X ou O venceu: se um dos dois marcou 3 quadrados seguidos.
-- jogando: se ainda há casas a jogar e nenhum jogador venceu.
-- empate: se não há mais casas a jogar e nenhum jogador venceu.
-- (desafio) empate antecipado: ainda há casas a jogar, mas não é mais possível ninguém vencer.
-Use os valores predefinidos para testar, não faça entrada de dados.
-*/
 
 const List<List<String>> empate = [
   ['X', 'O', 'X'],
@@ -45,8 +36,46 @@ const List<List<String>> vencedorO = [
 ];
 
 String resultado(List<List<String>> tabuleiro) {
-  // TODO: Apague a linha abaixo e implemente a sua lógica
-  throw UnimplementedError();
+  for (int i = 0; i < 3; i++) {
+    if (tabuleiro[i][0] == tabuleiro[i][1] &&
+        tabuleiro[i][1] == tabuleiro[i][2] &&
+        tabuleiro[i][0] != ' ') {
+      return tabuleiro[i][0];
+    }
+
+    if (tabuleiro[0][i] == tabuleiro[1][i] &&
+        tabuleiro[1][i] == tabuleiro[2][i] &&
+        tabuleiro[0][i] != ' ') {
+      return tabuleiro[0][i];
+    }
+  }
+
+  if (tabuleiro[0][0] == tabuleiro[1][1] &&
+      tabuleiro[1][1] == tabuleiro[2][2] &&
+      tabuleiro[0][0] != ' ') {
+    return tabuleiro[0][0];
+  }
+
+  if (tabuleiro[0][2] == tabuleiro[1][1] &&
+      tabuleiro[1][1] == tabuleiro[2][0] &&
+      tabuleiro[0][2] != ' ') {
+    return tabuleiro[0][2];
+  }
+
+  bool vazio = false;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (tabuleiro[i][j] == ' ') {
+        vazio = true;
+      }
+    }
+  }
+
+  if (vazio) {
+    return 'jogando';
+  } else {
+    return 'empate';
+  }
 }
 
 void main() {
@@ -56,7 +85,6 @@ void main() {
     vencedorX,
     vencedorO,
     empate,
-    // empateAntecipado, // Descomente esta linha para tentar o desafio
   ]) {
     print(resultado(tabuleiro));
   }
